@@ -27,7 +27,16 @@ Use of a hash function to index a hash table is called hashing or scatter storag
     Since, we can't overwrite old entries from a hash table, we need to store this new inserted value at a location different than what its key indicates. This adjustment in the hash table to accommodate new values is termed as collision resolution.
     + #### Open Addressing
         The general thought process of this technique is to find a different empty location in the hash table to store the element. 
-        + Linear probing: Find the very next empty location. If $h(k)$ is ocuppied, we check $h(k)+1$. If $h(k)+1$ fails, then $h(k)+2$,$h(k)+3$ ... until cacancy is found
+        - Linear probing: Find the very next empty location. If $h(k)$ is ocuppied, we check $h(k)+1$. If $h(k)+1$ fails, then $h(k)+2$,$h(k)+3$ ... until vacancy is found. However, linear probing leads to clustering of entries in the table, making searches slower and more cumbersome.
+        - Quadratic probing: The table is traversed in the order h(k)+1, h(k)+4, h(k)+9, h(k)+16 and so on.
+        - Double hashing: we use two hashing functions- h(n) for general hashing and and a new function h'(n) used specifically for resolving conflicts. So, vacancies are searched in the order as h(k), h(k) + h'(k), h(k) + 2h'(k) and so on...
+        - Advantages: Open Addressing techniques are highly efficient in memory usage as elements are stored in the space already allocated for the hash table. No extra space is required.
+        - Disadvantages: But due to clustering, searching is slower. In the worst case, when the hash table is at full capacity, we would have to check every cell in the hash table to determine if the element exists in the hash table or not.
+    + ### Close Addressing
+        Closed addressing techniques involves the use of chaining of entries in the hash table using linked lists. So, every entry in the hash table leads to a linked list of all the elements that were hashed to a particular key value. 
+        - Advantages: Advantages of using closed addressing technique is its easy implementation, as well as the surety that if the element is present in the hash table, it will only be found in the linked list at its key. Deletion is also quick and simple in chaining.
+        - Disadvantages:  Chaining leads to inefficient use of memory as some keys might never be used at all but have still been allocated space in the table. We also need extra memory allocation to store the elements as nodes in the linked list. In the worst case, chaining can lead to linear time complexity for searching.
+        
 ## HashSet
   * ### Usage of HashSet
     A HashSet is usually used for high-performance operations involving a set of unique data.
@@ -38,5 +47,20 @@ Use of a hash function to index a hash table is called hashing or scatter storag
   * ### Usage of HashTable
     Fast exist storage checking and adding new mapping k/v pair.
   * ### HashTable Operaions and Time Complexity
-    - Insert O(1), Delete O(1), Search O(1)
+    - #### Open addressing
+      |ACTIVITY|BEST CASE COMPLEXITY|AVERAGE CASE COMPLEXITY|WORST CASE COMPLEXITY|
+      | ----| ---- | ---- | ---- |
+      |Searching|O(1)|O(1)|O(n)|
+      |Insertion|O(1)|O(1)|O(n)|
+      |Deletion|O(1)|O(1)|O(n)|
+      |Space Complexity|O(n)|O(n)|O(n)|
+    - #### Close addressing (chaining)
+      |ACTIVITY|BEST CASE COMPLEXITY|AVERAGE CASE COMPLEXITY|WORST CASE COMPLEXITY|
+      | ----| ---- | ---- | ---- |
+      |Searching|O(1)|O(1)|O(n)|
+      |Insertion|O(1)|O(1)|O(n)|
+      |Deletion|O(1)|O(1)|O(n)|
+      |Space Complexity|O(m+n)|O(m+n)|O(m+n)|
+      
+      **where m is the size of the hash table and n is the number of items inserted. This is because linked nodes are allocated memory outside the hash map.**
 
