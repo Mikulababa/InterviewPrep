@@ -273,7 +273,7 @@ For each node, first, the node is visited and then it’s child nodes are put in
    * In the Diagonal Traversal of a Tree, all the nodes in a single diagonal will be printed one by one.
 
    * Input: 
-   * ![Alt text](image.png)
+   * ![Alt text](BinaryTree_DiagonalTraversal.png)
    * Diagonal Traversal of binary tree: 
      * 8 10 14
      * 3 6 7 13
